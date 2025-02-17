@@ -1,0 +1,112 @@
+-- DECOMPILED BY ADVANCED DECOMPILER V3
+-- USED GLOBALS: script.
+[003] :002:GETIMPORT      v0 = game
+[004] :002:LOADK          v2 = "CorePackages"
+[007] :002:CALL           v0 = v0:GetService(v2)
+[009] :004:GETIMPORT      v1 = require
+[011] :004:GETTABLEKS     v3 = v0.Packages
+[013] :004:GETTABLEKS     v2 = v3.Rodux
+[014] :004:CALL           v1 = v1(v2)
+[016] :005:GETIMPORT      v2 = require
+[018] :005:GETTABLEKS     v4 = v0.Packages
+[020] :005:GETTABLEKS     v3 = v4.Cryo
+[021] :005:CALL           v2 = v2(v3)
+[023] :007:GETIMPORT      v6 = script
+[025] :007:GETTABLEKS     v5 = v6.Parent
+[027] :007:GETTABLEKS     v4 = v5.Parent
+[029] :007:GETTABLEKS     v3 = v4.Actions
+[031] :008:GETIMPORT      v4 = require
+[033] :008:GETTABLEKS     v5 = v3.AddPlayer
+[034] :008:CALL           v4 = v4(v5)
+[036] :009:GETIMPORT      v5 = require
+[038] :009:GETTABLEKS     v6 = v3.RemovePlayer
+[039] :009:CALL           v5 = v5(v6)
+[041] :010:GETIMPORT      v6 = require
+[043] :010:GETTABLEKS     v7 = v3.SetPlayerLeaderstat
+[044] :010:CALL           v6 = v6(v7)
+[046] :012:GETTABLEKS     v7 = v1.createReducer
+[048] :012:NEWTABLE       v8 = {}
+[050] :012:NEWTABLE       v9 = {}
+[052] :013:GETTABLEKS     v10 = v4.name
+[053] :013:DUPCLOSURE     v11 = function(p1, p2)
+-- proto pool id: 0
+-- num upvalues: 1
+-- num inner protos: 0
+-- size instructions: 15
+-- size constants: 3
+-- lineinfo gap: 24
+-- max stack size: 7
+-- is typed: true
+[001] :014:GETUPVAL       v2 = u_v2
+[003] :014:GETTABLEKS     v1 = v2.Dictionary
+[005] :014:GETTABLEKS     v0 = v1.join
+[006] :014:MOVE           v1 = p1
+[008] :014:NEWTABLE       v2 = {}
+[010] :015:GETTABLEKS     v3 = p2.userId
+[012] :015:NEWTABLE       v4 = {}
+[013] :015:SETTABLE       v2[v3] = v4
+[014] :014:CALL           ... = v0(v1, v2)
+[015] :014:RETURN         return v0, ...
+end
+[055] :013:SETTABLE       v9[v10] = v11
+[057] :019:GETTABLEKS     v10 = v5.name
+[058] :019:DUPCLOSURE     v11 = function(p3, p4)
+-- proto pool id: 1
+-- num upvalues: 1
+-- num inner protos: 0
+-- size instructions: 16
+-- size constants: 4
+-- lineinfo gap: 24
+-- max stack size: 8
+-- is typed: true
+[001] :020:GETUPVAL       v2 = u_v2
+[003] :020:GETTABLEKS     v1 = v2.Dictionary
+[005] :020:GETTABLEKS     v0 = v1.join
+[006] :020:MOVE           v1 = p3
+[008] :020:NEWTABLE       v2 = {}
+[010] :021:GETTABLEKS     v3 = p4.userId
+[011] :021:GETUPVAL       v5 = u_v2
+[013] :021:GETTABLEKS     v4 = v5.None
+[014] :021:SETTABLE       v2[v3] = v4
+[015] :020:CALL           ... = v0(v1, v2)
+[016] :020:RETURN         return v0, ...
+end
+[060] :019:SETTABLE       v9[v10] = v11
+[062] :025:GETTABLEKS     v10 = v6.name
+[063] :025:DUPCLOSURE     v11 = function(p5, p6)
+-- proto pool id: 2
+-- num upvalues: 1
+-- num inner protos: 0
+-- size instructions: 35
+-- size constants: 5
+-- lineinfo gap: 24
+-- max stack size: 11
+-- is typed: true
+[002] :026:GETTABLEKS     v1 = p6.userId
+[003] :026:GETTABLE       v0 = p5[v1]
+[005] :026:JUMPXEQKNIL    if v0 == nil then -- goto #7
+[006] :027:RETURN         return p5
+end
+[007] :029:GETUPVAL       v2 = u_v2
+[009] :029:GETTABLEKS     v1 = v2.Dictionary
+[011] :029:GETTABLEKS     v0 = v1.join
+[012] :029:MOVE           v1 = p5
+[014] :029:NEWTABLE       v2 = {}
+[016] :030:GETTABLEKS     v3 = p6.userId
+[017] :030:GETUPVAL       v6 = u_v2
+[019] :030:GETTABLEKS     v5 = v6.Dictionary
+[021] :030:GETTABLEKS     v4 = v5.join
+[023] :030:GETTABLEKS     v6 = p6.userId
+[024] :030:GETTABLE       v5 = p5[v6]
+[026] :030:NEWTABLE       v6 = {}
+[028] :031:GETTABLEKS     v7 = p6.leaderstat
+[030] :031:GETTABLEKS     v8 = p6.value
+[031] :031:SETTABLE       v6[v7] = v8
+[032] :030:CALL           v4 = v4(v5, v6)
+[033] :030:SETTABLE       v2[v3] = v4
+[034] :029:CALL           ... = v0(v1, v2)
+[035] :029:RETURN         return v0, ...
+end
+[065] :025:SETTABLE       v9[v10] = v11
+[066] :012:CALL           v7 = v7(v8, v9)
+[067] :037:RETURN         return v7
