@@ -1,0 +1,235 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Flag to prevent repeated execution
+local abilitiesSetup = false
+
+if not abilitiesSetup then
+    abilitiesSetup = true
+    
+    -- Function to trigger the "Gojo Bizarre" ability
+    local function gojoBizarreAbility()
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://105553870427074"  -- Animation ID
+        local animationTrack = humanoid:LoadAnimation(animation)
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://17589291650"
+        sound.Parent = humanoidRootPart
+
+        sound:Play()
+        animationTrack:Play()
+        animationTrack:AdjustSpeed(0.9)
+
+        local args = { [1] = 0 }
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.BallService.RE.Shoot:FireServer(unpack(args))
+    end
+
+    -- Function to trigger the "Fake Heel Flick" ability
+    local function fakeHeelFlickAbility()
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://73458422902325"  -- Animation ID
+        local animationTrack = humanoid:LoadAnimation(animation)
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://17883496444"
+        sound.Parent = humanoidRootPart
+
+        sound:Play()
+        animationTrack:Play()
+        animationTrack:AdjustSpeed(0.9)
+    end
+
+    -- Function to trigger the "Gojo Dribbling" ability
+    local function gojoDribblingAbility()
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://105553870427074"  -- Animation ID
+        local animationTrack = humanoid:LoadAnimation(animation)
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://7147847068"
+        sound.Parent = humanoidRootPart
+
+        local function createLightningEffect()
+            local lightning = Instance.new("ParticleEmitter")
+            lightning.Texture = "rbxassetid://568667813"  -- Lightning texture
+            lightning.Lifetime = NumberRange.new(0.5, 1)
+            lightning.Rate = 100
+            lightning.Size = NumberSequence.new(1, 2)
+            lightning.Speed = NumberRange.new(5, 10)
+            lightning.Parent = humanoidRootPart
+            return lightning
+        end
+
+        sound:Play()
+        animationTrack:Play()
+        animationTrack:AdjustSpeed(0.6)
+
+        local lightningEffect = createLightningEffect()
+
+        local moveDirection = humanoidRootPart.CFrame.LookVector
+        local moveForce = 45
+        local bodyVelocity = Instance.new("BodyVelocity")
+        bodyVelocity.MaxForce = Vector3.new(50000, 50000, 50000)
+        bodyVelocity.Velocity = moveDirection * moveForce
+        bodyVelocity.Parent = humanoidRootPart
+
+        local originalHealth = humanoid.Health
+        humanoid.Health = math.huge
+
+        game:GetService("Debris"):AddItem(bodyVelocity, 1)
+
+        animationTrack.Stopped:Wait()
+        lightningEffect.Enabled = false
+        game:GetService("Debris"):AddItem(lightningEffect, 1)
+
+        wait(1)
+        humanoid.Health = originalHealth
+    end
+
+    -- Function to trigger the "Satoru Shot" ability
+    local function satoruShotAbility()
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://122513708013347"  -- Animation ID
+        local animationTrack = humanoid:LoadAnimation(animation)
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://7147847068"
+        sound.Parent = humanoidRootPart
+
+        sound:Play()
+        animationTrack:Play()
+        animationTrack:AdjustSpeed(1.8)
+
+        local args = { [1] = 200 }
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.BallService.RE.Shoot:FireServer(unpack(args))
+    end
+
+    -- Function to trigger the "Infinity Drive" ability
+    local function infinityDriveAbility()
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://87668366822867"  -- Animation ID
+        local animationTrack = humanoid:LoadAnimation(animation)
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://70820248066382"
+        sound.Parent = humanoidRootPart
+
+        local aura = Instance.new("ParticleEmitter")
+        aura.Color = ColorSequence.new(Color3.fromRGB(255, 105, 180))  -- Pink color
+        aura.Size = NumberSequence.new(1, 3)
+        aura.Transparency = NumberSequence.new(0.5)
+        aura.Lifetime = NumberRange.new(1)
+        aura.Rate = 100
+        aura.Speed = NumberRange.new(1, 3)
+        aura.Parent = humanoidRootPart
+        aura.Enabled = false
+
+        sound:Play()
+        animationTrack:Play()
+        animationTrack:AdjustSpeed(5)
+
+        aura.Enabled = true
+
+        local args = { [1] = 120 }
+        game:GetService("ReplicatedStorage").Packages.Knit.Services.BallService.RE.Shoot:FireServer(unpack(args))
+
+        animationTrack.Stopped:Connect(function()
+            aura.Enabled = false
+        end)
+    end
+
+    -- Function to trigger the "Domain Expansion" ability (Lighting effect and sound)
+    local function domainExpansionAbility()
+        local lighting = game:GetService("Lighting")
+        lighting.Brightness = 500
+
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://115214890263100"
+        sound.Volume = 1
+        sound.Parent = player.PlayerGui
+        sound:Play()
+
+        wait(7)
+        lighting.Brightness = 1
+    end
+
+    -- Clone the ability button for each keybind
+    local CloneGojoBizarre = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneGojoBizarre.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneGojoBizarre.LayoutOrder = -3
+    CloneGojoBizarre.Keybind.Text = "Y"
+    CloneGojoBizarre.Timer.Text = "Gojo Bizarre"
+    CloneGojoBizarre.ActualTimer.Text = ""
+    CloneGojoBizarre.Cooldown:Destroy()
+
+    local CloneFakeHeelFlick = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneFakeHeelFlick.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneFakeHeelFlick.LayoutOrder = -3
+    CloneFakeHeelFlick.Keybind.Text = "X"
+    CloneFakeHeelFlick.Timer.Text = "Fake Heel Flick"
+    CloneFakeHeelFlick.ActualTimer.Text = ""
+    CloneFakeHeelFlick.Cooldown:Destroy()
+
+    local CloneGojoDribbling = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneGojoDribbling.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneGojoDribbling.LayoutOrder = -3
+    CloneGojoDribbling.Keybind.Text = "V"
+    CloneGojoDribbling.Timer.Text = "Gojo Dribbling"
+    CloneGojoDribbling.ActualTimer.Text = ""
+    CloneGojoDribbling.Cooldown:Destroy()
+
+    local CloneSatoruShot = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneSatoruShot.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneSatoruShot.LayoutOrder = -3
+    CloneSatoruShot.Keybind.Text = "P"
+    CloneSatoruShot.Timer.Text = "Satoru Shot"
+    CloneSatoruShot.ActualTimer.Text = ""
+    CloneSatoruShot.Cooldown:Destroy()
+
+    local CloneInfinityDrive = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneInfinityDrive.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneInfinityDrive.LayoutOrder = -3
+    CloneInfinityDrive.Keybind.Text = "H"
+    CloneInfinityDrive.Timer.Text = "Infinity Drive"
+    CloneInfinityDrive.ActualTimer.Text = ""
+    CloneInfinityDrive.Cooldown:Destroy()
+
+    local CloneDomainExpansion = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities["1"]:Clone()
+    CloneDomainExpansion.Parent = game.Players.LocalPlayer.PlayerGui.InGameUI.Bottom.Abilities
+    CloneDomainExpansion.LayoutOrder = -3
+    CloneDomainExpansion.Keybind.Text = "N"
+    CloneDomainExpansion.Timer.Text = "Domain Expansion"
+    CloneDomainExpansion.ActualTimer.Text = ""
+    CloneDomainExpansion.Cooldown:Destroy()
+
+    -- Connect the keybinds to their respective abilities
+    CloneGojoBizarre.Activated:Connect(gojoBizarreAbility)
+    CloneFakeHeelFlick.Activated:Connect(fakeHeelFlickAbility)
+    CloneGojoDribbling.Activated:Connect(gojoDribblingAbility)
+    CloneSatoruShot.Activated:Connect(satoruShotAbility)
+    CloneInfinityDrive.Activated:Connect(infinityDriveAbility)
+    CloneDomainExpansion.Activated:Connect(domainExpansionAbility)
+
+    -- Listen for the key presses
+    game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+        if gameProcessed then return end
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+            if input.KeyCode == Enum.KeyCode.Y then
+                gojoBizarreAbility()
+            elseif input.KeyCode == Enum.KeyCode.X then
+                fakeHeelFlickAbility()
+            elseif input.KeyCode == Enum.KeyCode.V then
+                gojoDribblingAbility()
+            elseif input.KeyCode == Enum.KeyCode.P then
+                satoruShotAbility()
+            elseif input.KeyCode == Enum.KeyCode.H then
+                infinityDriveAbility()
+            elseif input.KeyCode == Enum.KeyCode.N then
+                domainExpansionAbility()
+            end
+        end
+    end)
+end
